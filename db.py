@@ -13,4 +13,23 @@ def get_db_connection():
         print("database connection failed:", err)
         return None
     
-def save_conversation(user_)
+
+def save_conversation(user_text, emotion, intent, response):
+    connection = get_db_connection()
+    if connection is None:
+        return
+
+    try:
+        cursor = connection.cursor()
+        query = """
+        INSERT INTO conversation_logs (user_text, emotion, intent, response)
+        VALUES (%s, %s, %s, %s)
+        """
+        values = (user_text, emotion, intent, response)
+        cursor.execute(query, values)
+        connection.commit()
+    except Exception as e:
+        print("Failed to save conversation:", e)
+    finally:
+        cursor.close()
+        connection.close()
