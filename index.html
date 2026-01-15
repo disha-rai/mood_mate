@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+    <title>MoodMate</title>
+</head>
+<body>
+    <div class="container">
+        <h1>🌿 MoodMate</h1> 
+
+        <form method="POST">
+            <input type="text" name="user_input" placeholder="Type how you feel..." required>
+            <br><br>
+            <button type="submit">Analyze</button>
+        </form>
+
+        {% if text %}
+            <h3>You typed:</h3>
+            <p>{{ text }}</p> <!--{{ text }} = Flask → HTML data transfer-->
+        {% endif %}
+
+        {% if tokens %}
+            <h3>Processed Tokens:</h3>
+            <p>{{ tokens }}</p>
+        {% endif %}
+
+        {% if emotion %}
+            <h3>Detected Emotion:</h3>
+            <p><strong>{{ emotion }}</strong></p>
+        {% endif %}
+
+        {% if intent %}
+            <h3>Detect Intent:</h3>
+            <p><strong>{{ intent }}</strong></p>
+        {% endif%}
+
+        {% if response %}
+            <h3>MoodMate Says: </h3>
+            <p><strong>{{ response }}</strong></p>
+        {% endif %}
+    </div>
+</body>
+</html>
